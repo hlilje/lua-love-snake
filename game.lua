@@ -1,4 +1,6 @@
 require "constants"
+require "map"
+require "players"
 
 
 -- Initialise the game state.
@@ -50,19 +52,30 @@ end
 -- Handle the given player intent.
 function handleIntent(intent)
     print("Handle intent " .. Intents.intent)
+    -- TODO: Move this
     local x, y = nil, nil
     if intent == INTENT_PLAYER_1_UP then
+        --[[
         x, y = Snake1.x, Snake1.y - 1
         if not isBlocked(x, y) then
             Snake1 = addSnakePos(Snake1, x, y, TILE_PLAYER_1)
         end
+        ]]
+        Snake1Dir = MOVING_UP
     elseif intent == INTENT_PLAYER_1_LEFT then
+        Snake1Dir = MOVING_LEFT
     elseif intent == INTENT_PLAYER_1_DOWN then
+        Snake1Dir = MOVING_DOWN
     elseif intent == INTENT_PLAYER_1_RIGHT then
+        Snake1Dir = MOVING_RIGHT
     elseif intent == INTENT_PLAYER_2_UP then
+        Snake2Dir = MOVING_UP
     elseif intent == INTENT_PLAYER_2_LEFT then
+        Snake2Dir = MOVING_LEFT
     elseif intent == INTENT_PLAYER_2_DOWN then
+        Snake2Dir = MOVING_DOWN
     elseif intent == INTENT_PLAYER_2_RIGHT then
+        Snake2Dir = MOVING_RIGHT
     end
 end
 

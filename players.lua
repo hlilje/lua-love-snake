@@ -9,7 +9,7 @@ function addSnakePos(snake, x, y, playerTile)
     return {next = snake, x = x, y = y}
 end
 
--- Remove the tail of the given snake
+-- Remove the tail of the given snake.
 function delSnakePos(snake)
     if snake == nil then return end
 
@@ -25,6 +25,11 @@ end
 -- Create initial player positions.
 function createPlayers()
     Snake1, Snake2 = nil, nil
+
+    -- TODO: Create snake containers
+    -- Randomise initial directions of movement
+    Snake1Dir = love.math.random(MOVING_UP, MOVING_RIGHT)
+    Snake2Dir = love.math.random(MOVING_UP, MOVING_RIGHT)
 
     local xPosP1, yPosP1, xPosP2, xPosP2 = 1, 1, 1, 1
 

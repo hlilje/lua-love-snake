@@ -15,6 +15,12 @@ COLOUR_PLAYER_1 = {255, 0, 0}
 COLOUR_PLAYER_2 = {0, 0, 255}
 COLOUR_FOOD     = {0, 255, 0}
 
+-- Player movement direction enums
+MOVING_UP    = 0
+MOVING_LEFT  = 1
+MOVING_DOWN  = 2
+MOVING_RIGHT = 3
+
 -- Player intent enums
 INTENT_PLAYER_1_UP    = 0
 INTENT_PLAYER_1_LEFT  = 1
