@@ -49,33 +49,33 @@ function love.keypressed(key)
     end
 end
 
+-- TODO: Implement
+function movePlayer(snake, playerTile)
+    x, y = snake.pos.x, snake.pos.y - 1
+    if not isBlocked(x, y) then
+        addSnakePos(snake, x, y, playerTile)
+    end
+end
+
 -- Handle the given player intent.
 function handleIntent(intent)
     print("Handle intent " .. Intents.intent)
-    -- TODO: Move this
-    local x, y = nil, nil
     if intent == INTENT_PLAYER_1_UP then
-        --[[
-        x, y = Snake1.x, Snake1.y - 1
-        if not isBlocked(x, y) then
-            Snake1 = addSnakePos(Snake1, x, y, TILE_PLAYER_1)
-        end
-        ]]
-        Snake1Dir = MOVING_UP
+        Snake1.dir = MOVING_UP
     elseif intent == INTENT_PLAYER_1_LEFT then
-        Snake1Dir = MOVING_LEFT
+        Snake1.dir = MOVING_LEFT
     elseif intent == INTENT_PLAYER_1_DOWN then
-        Snake1Dir = MOVING_DOWN
+        Snake1.dir = MOVING_DOWN
     elseif intent == INTENT_PLAYER_1_RIGHT then
-        Snake1Dir = MOVING_RIGHT
+        Snake1.dir = MOVING_RIGHT
     elseif intent == INTENT_PLAYER_2_UP then
-        Snake2Dir = MOVING_UP
+        Snake2.dir = MOVING_UP
     elseif intent == INTENT_PLAYER_2_LEFT then
-        Snake2Dir = MOVING_LEFT
+        Snake2.dir = MOVING_LEFT
     elseif intent == INTENT_PLAYER_2_DOWN then
-        Snake2Dir = MOVING_DOWN
+        Snake2.dir = MOVING_DOWN
     elseif intent == INTENT_PLAYER_2_RIGHT then
-        Snake2Dir = MOVING_RIGHT
+        Snake2.dir = MOVING_RIGHT
     end
 end
 
