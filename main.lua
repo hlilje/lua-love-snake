@@ -5,7 +5,7 @@ require "players"
 
 -- Load the game.
 function love.load()
-    TimeToMove = 0 -- Keep track of when to advance state
+    createState()
     createMap(love.graphics.getDimensions())
     createPlayers()
 end
