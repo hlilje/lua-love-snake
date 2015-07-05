@@ -1,3 +1,4 @@
+require "game"
 require "map"
 require "players"
 
@@ -11,7 +12,7 @@ end
 
 -- Update the game state.
 function love.update(dt)
-    updatePlayers(dt)
+    updateState(dt)
 end
 
 -- Draw the game.

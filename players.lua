@@ -21,14 +21,6 @@ function delSnakePos(snake)
     prev.next = nil
 end
 
-function updatePlayers(dt)
-    TimeToMove = TimeToMove + dt
-    if TimeToMove >= SPEED_GAME then
-        TimeToMove = 0
-        print("MOVE")
-    end
-end
-
 -- Create initial player positions.
 function createPlayers()
     Snake1, Snake2 = nil, nil
