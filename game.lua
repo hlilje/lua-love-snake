@@ -9,12 +9,12 @@ end
 
 -- Add the given intent to the end of the intent queue.
 function addIntent(intent)
+    print("Add intent " .. intent)
+
     if Intents == nil then
         Intents = {next = nil, intent = intent}
         return
     end
-
-    print("Add intent " .. intent)
 
     local last = Intents
 
@@ -47,15 +47,33 @@ function love.keypressed(key)
     end
 end
 
--- Handle the intents in the intent queue while clearing it.
-function handleIntents()
-    -- TODO: Implement
-
-    while Intents do
-        print("Handle intent " .. Intents.intent)
-        Intents = Intents.next
+-- Handle the given player intent.
+function handleIntent(intent)
+    print("Handle intent " .. Intents.intent)
+    local x, y = nil, nil
+    if intent == INTENT_PLAYER_1_UP then
+        x, y = Snake1.x, Snake1.y - 1
+        if not isBlocked(x, y) then
+            Snake1 = addSnakePos(Snake1, x, y, TILE_PLAYER_1)
+        end
+    elseif intent == INTENT_PLAYER_1_LEFT then
+    elseif intent == INTENT_PLAYER_1_DOWN then
+    elseif intent == INTENT_PLAYER_1_RIGHT then
+    elseif intent == INTENT_PLAYER_2_UP then
+    elseif intent == INTENT_PLAYER_2_LEFT then
+    elseif intent == INTENT_PLAYER_2_DOWN then
+    elseif intent == INTENT_PLAYER_2_RIGHT then
     end
-    Intents = nil -- Remove final reference
+end
+
+-- Handle the player intents in the intent queue while clearing it.
+function handleIntents()
+    while Intents do
+        local temp = Intents.next
+        handleIntent(Intents.intent)
+        Intents.next = nil -- Might not help garbage collection
+        Intents = temp
+    end
 end
 
 -- Update the game state.

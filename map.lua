@@ -44,7 +44,11 @@ end
 
 -- Return true if the given position is blocked.
 function isBlocked(x, y)
-    return TileMap[y][x] ~= TILE_FREE
+    if x > MAP_WIDTH or x < 1 or y > MAP_HEIGHT or y < 1 then
+        return true
+    else
+        return TileMap[y][x] ~= TILE_FREE
+    end
 end
 
 -- Draw the game map.

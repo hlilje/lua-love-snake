@@ -2,10 +2,11 @@ require "constants"
 require "map"
 
 
--- Add the given position to the front of the given snake.
-function addSnakePos(snake, x, y)
-    -- TODO: Check that there is no name clash
-    Snake1 = {next = Snake1, x = x, y = y}
+-- Add the given position to the front of the given snake by returning it.
+function addSnakePos(snake, x, y, playerTile)
+    TileMap[y][x] = playerTile
+
+    return {next = snake, x = x, y = y}
 end
 
 -- Remove the tail of the given snake
@@ -38,8 +39,6 @@ function createPlayers()
         yPosP2 = love.math.random(1, MAP_HEIGHT)
     until not isBlocked(xPosP2, yPosP2)
 
-    Snake1 = addSnakePos(Snake1, xPosP1, yPosP1)
-
-    TileMap[yPosP1][xPosP1] = TILE_PLAYER_1
-    TileMap[yPosP2][xPosP2] = TILE_PLAYER_2
+    Snake1 = addSnakePos(Snake1, xPosP1, yPosP1, TILE_PLAYER_1)
+    Snake2 = addSnakePos(Snake2, xPosP2, yPosP2, TILE_PLAYER_2)
 end
