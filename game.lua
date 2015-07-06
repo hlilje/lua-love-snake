@@ -49,14 +49,6 @@ function love.keypressed(key)
     end
 end
 
--- TODO: Implement
-function movePlayer(snake, playerTile)
-    x, y = snake.pos.x, snake.pos.y - 1
-    if not isBlocked(x, y) then
-        addSnakePos(snake, x, y, playerTile)
-    end
-end
-
 -- Handle the given player intent.
 function handleIntent(intent)
     print("Handle intent " .. Intents.intent)

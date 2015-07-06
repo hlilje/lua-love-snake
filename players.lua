@@ -47,3 +47,12 @@ function createPlayers()
     addSnakePos(Snake1, xPosP1, yPosP1, TILE_PLAYER_1)
     addSnakePos(Snake2, xPosP2, yPosP2, TILE_PLAYER_2)
 end
+
+-- TODO: Implement
+function movePlayer(snake, playerTile)
+    x, y = snake.pos.x, snake.pos.y - 1
+    if not isBlocked(x, y) then
+        addSnakePos(snake, x, y, playerTile)
+    end
+end
+
