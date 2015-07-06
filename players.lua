@@ -42,10 +42,32 @@ function createPlayers()
     addSnakePos(Snake2, xPosP2, yPosP2, TILE_PLAYER_2)
 end
 
--- TODO: Implement
-function movePlayer(snake, playerTile)
-    local x, y = snake.pos.x, snake.pos.y - 1
+-- Try to move the given snake one step in its current direction.
+function moveSnake(snake, playerTile)
+    local x, y = nil, nil
+
+    if snake.dir == MOVING_UP then
+        x = snake.pos[1].x
+        y = snake.pos[1].y - 1
+    elseif snake.dir == MOVING_LEFT then
+        x = snake.pos[1].x - 1
+        y = snake.pos[1].y
+    elseif snake.dir == MOVING_DOWN then
+        x = snake.pos[1].x
+        y = snake.pos[1].y + 1
+    elseif snake.dir == MOVING_RIGHT then
+        x = snake.pos[1].x + 1
+        y = snake.pos[1].y
+    end
+
     if not isBlocked(x, y) then
         addSnakePos(snake, x, y, playerTile)
+        delSnakePos(snake)
     end
+end
+
+-- Move all players (snakes) one step.
+function movePlayers()
+    moveSnake(Snake1, TILE_PLAYER_1)
+    moveSnake(Snake2, TILE_PLAYER_2)
 end

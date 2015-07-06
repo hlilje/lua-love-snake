@@ -75,4 +75,5 @@ function updateState(dt)
     TimeToMove = 0
 
     handleIntents()
+    movePlayers()
 end
