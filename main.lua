@@ -8,6 +8,7 @@ function love.load()
     createState()
     createMap(love.graphics.getDimensions())
     createPlayers()
+    generateFood()
 end
 
 -- Update the game state.

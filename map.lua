@@ -60,3 +60,14 @@ function drawMap()
     end
 end
 
+-- Randomly place one food on the map.
+function generateFood()
+    local x, y = nil, nil
+
+    repeat
+        x = love.math.random(1, MAP_WIDTH)
+        y = love.math.random(1, MAP_HEIGHT)
+    until not isBlocked(x, y)
+
+    TileMap[y][x] = TILE_FOOD
+end
