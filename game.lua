@@ -5,25 +5,14 @@ require "players"
 
 -- Initialise the game state.
 function createState()
-    TimeToMove = 0   -- Keep track of when to advance state
-    Intents    = nil -- Player intent queue
+    TimeToMove = 0  -- Keep track of when to advance state
+    Intents    = {} -- Player intent queue
 end
 
 -- Add the given intent to the end of the intent queue.
 function addIntent(intent)
-    print("Add intent " .. intent)
-
-    if Intents == nil then
-        Intents = {next = nil, intent = intent}
-        return
-    end
-
-    local last = Intents
-
-    while last.next do
-        last = last.next
-    end
-    last.next = {next = nil, intent = intent}
+    print("Add intent: " .. intent)
+    table.insert(Intents, intent)
 end
 
 -- Keypress callback.
@@ -51,7 +40,7 @@ end
 
 -- Handle the given player intent.
 function handleIntent(intent)
-    print("Handle intent " .. Intents.intent)
+    print("Handle intent: " .. intent)
     if intent == INTENT_PLAYER_1_UP then
         Snake1.dir = MOVING_UP
     elseif intent == INTENT_PLAYER_1_LEFT then
@@ -73,11 +62,9 @@ end
 
 -- Handle the player intents in the intent queue while clearing it.
 function handleIntents()
-    while Intents do
-        local temp = Intents.next
-        handleIntent(Intents.intent)
-        Intents.next = nil -- Might not help garbage collection
-        Intents = temp
+    while #Intents > 0 do
+        handleIntent(Intents[1])
+        table.remove(Intents)
     end
 end
 

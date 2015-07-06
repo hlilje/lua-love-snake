@@ -2,30 +2,24 @@ require "constants"
 require "map"
 
 
--- Add the given position to the front of the given snake.
+-- Insert the given position to the front of the given snake.
 function addSnakePos(snake, x, y, playerTile)
     TileMap[y][x] = playerTile
-    snake.pos = {next = snake.pos, x = x, y = y}
+    table.insert(snake.pos, 1, {x = x, y = y})
 end
 
 -- Remove the tail of the given snake.
 function delSnakePos(snake)
-    if snake.pos == nil then return end
-
-    local prev = snake.pos
-
-    while snake.pos.next do
-        prev = snake.pos
-        snake = snake.pos.next
-    end
-    prev.pos.next = nil
+    local x, y = snake.pos[#snake.pos].x, snake.pos[#snake.pos].y
+    TileMap[y][x] = TILE_FREE
+    table.remove(snake.pos)
 end
 
 -- Create initial players.
 function createPlayers()
-    -- {Positions linked list, direction enum}
-    Snake1 = {pos = nil, dir = nil}
-    Snake2 = {pos = nil, dir = nil}
+    -- {Positions table (stack), direction enum}
+    Snake1 = {pos = {}, dir = nil}
+    Snake2 = {pos = {}, dir = nil}
 
     -- Randomise initial directions of movement
     Snake1.dir = love.math.random(MOVING_UP, MOVING_RIGHT)
@@ -50,9 +44,8 @@ end
 
 -- TODO: Implement
 function movePlayer(snake, playerTile)
-    x, y = snake.pos.x, snake.pos.y - 1
+    local x, y = snake.pos.x, snake.pos.y - 1
     if not isBlocked(x, y) then
         addSnakePos(snake, x, y, playerTile)
     end
 end
-
