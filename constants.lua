@@ -1,4 +1,4 @@
-SPEED_GAME = 0.20 -- Delay until game state advancement
+SPEED_GAME = 0.15 -- Delay until game state advancement
 SIZE_TILE  = 16   -- Tile size in pixels
 
 -- Tile enums

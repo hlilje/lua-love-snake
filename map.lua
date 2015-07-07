@@ -47,7 +47,7 @@ function isBlocked(x, y)
     if x > MAP_WIDTH or x < 1 or y > MAP_HEIGHT or y < 1 then
         return true
     else
-        return TileMap[y][x] ~= TILE_FREE
+        return (TileMap[y][x] ~= TILE_FREE and TileMap[y][x] ~= TILE_FOOD)
     end
 end
 
@@ -62,7 +62,7 @@ end
 
 -- Randomly place one food on the map.
 function generateFood()
-    local x, y = nil, nil
+    local x, y
 
     repeat
         x = love.math.random(1, MAP_WIDTH)

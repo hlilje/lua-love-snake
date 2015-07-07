@@ -18,8 +18,8 @@ end
 -- Create initial players.
 function createPlayers()
     -- {Positions table (stack), direction enum}
-    Snake1 = {pos = {}, dir = nil}
-    Snake2 = {pos = {}, dir = nil}
+    Snake1 = {pos = {}, dir}
+    Snake2 = {pos = {}, dir}
 
     -- Randomise initial directions of movement
     Snake1.dir = love.math.random(MOVING_UP, MOVING_RIGHT)
@@ -42,9 +42,9 @@ function createPlayers()
     addSnakePos(Snake2, xPosP2, yPosP2, TILE_PLAYER_2)
 end
 
--- Try to move the given snake one step in its current direction.
-function moveSnake(snake, playerTile)
-    local x, y = nil, nil
+-- Return the next position the given snake will move to.
+function getNextSnakePos(snake)
+    local x, y
 
     if snake.dir == MOVING_UP then
         x = snake.pos[1].x
@@ -59,15 +59,22 @@ function moveSnake(snake, playerTile)
         x = snake.pos[1].x + 1
         y = snake.pos[1].y
     end
-
-    if not isBlocked(x, y) then
-        addSnakePos(snake, x, y, playerTile)
-        delSnakePos(snake)
-    end
+    
+    return x, y
 end
 
--- Move all players (snakes) one step.
-function movePlayers()
-    moveSnake(Snake1, TILE_PLAYER_1)
-    moveSnake(Snake2, TILE_PLAYER_2)
+-- Get the next positions the players will move to.
+function getNextPositions()
+    local x1, y1, x2, y2
+
+    x1, y1 = getNextSnakePos(Snake1)
+    x2, y2 = getNextSnakePos(Snake2)
+
+    return x1, y1, x2, y2
+end
+
+-- Move the given snake to the given tile, don't delete tail if grow == true.
+function moveSnake(snake, x, y, playerTile, grow)
+    addSnakePos(snake, x, y, playerTile)
+    if not grow then delSnakePos(snake) end
 end

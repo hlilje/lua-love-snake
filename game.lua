@@ -5,13 +5,14 @@ require "players"
 
 -- Initialise the game state.
 function createState()
-    TimeToMove = 0  -- Keep track of when to advance state
-    Intents    = {} -- Player intent queue
+    TimeToMove  = 0     -- Keep track of when to advance state
+    Intents     = {}    -- Player intent queue
+    LossPlayer1 = false -- If player one loses from the move
+    LossPlayer2 = false -- If player two loses from the move
 end
 
 -- Add the given intent to the end of the intent queue.
 function addIntent(intent)
-    print("Add intent: " .. intent)
     table.insert(Intents, intent)
 end
 
@@ -40,7 +41,6 @@ end
 
 -- Handle the given player intent.
 function handleIntent(intent)
-    print("Handle intent: " .. intent)
     if intent == INTENT_PLAYER_1_UP then
         Snake1.dir = MOVING_UP
     elseif intent == INTENT_PLAYER_1_LEFT then
@@ -68,6 +68,36 @@ function handleIntents()
     end
 end
 
+-- Handle which tiles the players are about to move to, return whether
+-- the players should grow from food or not.
+function handleNextTiles(x1, y1, x2, y2)
+    local growP1, growP2
+
+    -- Tie if they both move to the same tile simultaneously
+    if x1 == x2 and y1 == y2 then
+        LossPlayer1 = true
+        LossPlayer1 = true
+        return false, false
+    end
+
+    -- Loss for given player if the tile is currently blocked
+    -- TODO: Handle when you are reversing direction
+    LossPlayer1 = isBlocked(x1, y1)
+    LossPlayer2 = isBlocked(x2, y2)
+    if LossPlayer1 or LossPlayer2 then
+        return false, false
+    end
+
+    if TileMap[y1][x1] == TILE_FOOD then
+        growP1 = true
+    end
+    if TileMap[y2][x1] == TILE_FOOD then
+        growP2 = true
+    end
+
+    return growP1, growP2
+end
+
 -- Update the game state.
 function updateState(dt)
     TimeToMove = TimeToMove + dt
@@ -75,5 +105,17 @@ function updateState(dt)
     TimeToMove = 0
 
     handleIntents()
-    movePlayers()
+
+    local x1, y1, x2, y2 = getNextPositions()
+
+    local grow1, grow2 = handleNextTiles(x1, y1, x2, y2)
+
+    -- TODO: Handle game over state
+    if LossPlayer1 or LossPlayer2 then
+        love.event.quit()
+        return
+    end
+
+    moveSnake(Snake1, x1, y1, TILE_PLAYER_1, grow1)
+    moveSnake(Snake2, x2, y2, TILE_PLAYER_2, grow2)
 end
