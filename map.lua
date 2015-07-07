@@ -47,8 +47,13 @@ function isBlocked(x, y)
     if x > MAP_WIDTH or x < 1 or y > MAP_HEIGHT or y < 1 then
         return true
     else
-        return (TileMap[y][x] ~= TILE_FREE and TileMap[y][x] ~= TILE_FOOD)
+        return TileMap[y][x] ~= TILE_FREE and TileMap[y][x] ~= TILE_FOOD
     end
+end
+
+-- Return true if the given position is a player tile.
+function isPlayer(x, y)
+    return TileMap[y][x] == TILE_PLAYER_1 or TileMap[y][x] == TILE_PLAYER_2
 end
 
 -- Draw the game map.
@@ -67,7 +72,7 @@ function generateFood()
     repeat
         x = love.math.random(1, MAP_WIDTH)
         y = love.math.random(1, MAP_HEIGHT)
-    until not isBlocked(x, y)
+    until not isBlocked(x, y) and not isPlayer(x, y)
 
     TileMap[y][x] = TILE_FOOD
 end

@@ -59,7 +59,7 @@ function getNextSnakePos(snake)
         x = snake.pos[1].x + 1
         y = snake.pos[1].y
     end
-    
+
     return x, y
 end
 
@@ -80,6 +80,7 @@ function moveSnake(snake, x, y, playerTile, grow)
 end
 
 -- Reverse the given snake.
+-- TODO: Reverse entire table
 function reverseSnake(snake)
     local headX, headY = snake.pos[1].x, snake.pos[1].y
     local tailX, tailY = snake.pos[#snake.pos].x, snake.pos[#snake.pos].y

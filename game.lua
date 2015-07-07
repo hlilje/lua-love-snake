@@ -98,7 +98,7 @@ function handleNextTiles(x1, y1, x2, y2)
     if TileMap[y1][x1] == TILE_FOOD then
         growP1 = true
     end
-    if TileMap[y2][x1] == TILE_FOOD then
+    if TileMap[y2][x2] == TILE_FOOD then
         growP2 = true
     end
 
@@ -125,4 +125,6 @@ function updateState(dt)
 
     moveSnake(Snake1, x1, y1, TILE_PLAYER_1, grow1)
     moveSnake(Snake2, x2, y2, TILE_PLAYER_2, grow2)
+
+    if grow1 or grow2 then generateFood() end
 end
