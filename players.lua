@@ -78,3 +78,13 @@ function moveSnake(snake, x, y, playerTile, grow)
     addSnakePos(snake, x, y, playerTile)
     if not grow then delSnakePos(snake) end
 end
+
+-- Reverse the given snake.
+function reverseSnake(snake)
+    local headX, headY = snake.pos[1].x, snake.pos[1].y
+    local tailX, tailY = snake.pos[#snake.pos].x, snake.pos[#snake.pos].y
+    snake.pos[1].x = tailX
+    snake.pos[1].y = tailY
+    snake.pos[#snake.pos].x = headX
+    snake.pos[#snake.pos].y = headY
+end

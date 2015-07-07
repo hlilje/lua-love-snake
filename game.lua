@@ -42,20 +42,28 @@ end
 -- Handle the given player intent.
 function handleIntent(intent)
     if intent == INTENT_PLAYER_1_UP then
+        if Snake1.dir == MOVING_DOWN then reverseSnake(Snake1) end
         Snake1.dir = MOVING_UP
     elseif intent == INTENT_PLAYER_1_LEFT then
+        if Snake1.dir == MOVING_RIGHT then reverseSnake(Snake1) end
         Snake1.dir = MOVING_LEFT
     elseif intent == INTENT_PLAYER_1_DOWN then
+        if Snake1.dir == MOVING_UP then reverseSnake(Snake1) end
         Snake1.dir = MOVING_DOWN
     elseif intent == INTENT_PLAYER_1_RIGHT then
+        if Snake1.dir == MOVING_LEFT then reverseSnake(Snake1) end
         Snake1.dir = MOVING_RIGHT
     elseif intent == INTENT_PLAYER_2_UP then
+        if Snake2.dir == MOVING_DOWN then reverseSnake(Snake2) end
         Snake2.dir = MOVING_UP
     elseif intent == INTENT_PLAYER_2_LEFT then
+        if Snake2.dir == MOVING_RIGHT then reverseSnake(Snake2) end
         Snake2.dir = MOVING_LEFT
     elseif intent == INTENT_PLAYER_2_DOWN then
+        if Snake2.dir == MOVING_UP then reverseSnake(Snake2) end
         Snake2.dir = MOVING_DOWN
     elseif intent == INTENT_PLAYER_2_RIGHT then
+        if Snake2.dir == MOVING_LEFT then reverseSnake(Snake2) end
         Snake2.dir = MOVING_RIGHT
     end
 end
@@ -81,7 +89,6 @@ function handleNextTiles(x1, y1, x2, y2)
     end
 
     -- Loss for given player if the tile is currently blocked
-    -- TODO: Handle when you are reversing direction
     LossPlayer1 = isBlocked(x1, y1)
     LossPlayer2 = isBlocked(x2, y2)
     if LossPlayer1 or LossPlayer2 then
