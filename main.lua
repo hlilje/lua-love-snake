@@ -6,6 +6,8 @@ require "players"
 
 -- Load the game.
 function love.load()
+    assertConfig()
+
     createState()
     createMap(love.graphics.getDimensions())
     createPlayers()

@@ -1,7 +1,31 @@
+require "conf"
 require "constants"
 require "map"
 require "players"
 
+
+-- Check that the game config has the required values.
+function assertConfig()
+    assert(Config.window.width >= 128 and Config.window.width <= 1920, "Invalid screen width")
+    assert(Config.window.height >= 128 and Config.window.height <= 1080, "Invalid screen height")
+    assert(not Config.window.resizable, "Window resizing not allowed")
+    assert(not Config.console, "Console not allowed")
+
+    assert(Config.modules.audio   , "Missing LÖVE module")
+    assert(Config.modules.event   , "Missing LÖVE module")
+    assert(Config.modules.graphics, "Missing LÖVE module")
+    assert(Config.modules.image   , "Missing LÖVE module")
+    assert(Config.modules.joystick, "Missing LÖVE module")
+    assert(Config.modules.keyboard, "Missing LÖVE module")
+    assert(Config.modules.math    , "Missing LÖVE module")
+    assert(Config.modules.mouse   , "Missing LÖVE module")
+    assert(Config.modules.physics , "Missing LÖVE module")
+    assert(Config.modules.sound   , "Missing LÖVE module")
+    assert(Config.modules.system  , "Missing LÖVE module")
+    assert(Config.modules.timer   , "Missing LÖVE module")
+    assert(Config.modules.window  , "Missing LÖVE module")
+    assert(Config.modules.thread  , "Missing LÖVE module")
+end
 
 -- Initialise the game state.
 function createState()

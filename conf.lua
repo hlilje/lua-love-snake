@@ -33,4 +33,6 @@ function love.conf(t)
     t.modules.timer    = true                  -- Enable the timer module (boolean)
     t.modules.window   = true                  -- Enable the window module (boolean)
     t.modules.thread   = true                  -- Enable the thread module (boolean)
+
+    Config = t -- Save config values for later validation
 end
