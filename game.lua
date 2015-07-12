@@ -5,10 +5,12 @@ require "players"
 
 -- Initialise the game state.
 function createState()
-    TimeToMove  = 0     -- Keep track of when to advance state
-    Intents     = {}    -- Player intent queue
-    LossPlayer1 = false -- If player one loses from the move
-    LossPlayer2 = false -- If player two loses from the move
+    TimeToMove   = 0     -- Keep track of when to advance state
+    Intents      = {}    -- Player intent queue
+    LossPlayer1  = false -- If player one loses from the move
+    LossPlayer2  = false -- If player two loses from the move
+    ScorePlayer1 = 0     -- Score of player 1
+    ScorePlayer2 = 0     -- Score of player 2
 end
 
 -- Add the given intent to the end of the intent queue.
@@ -97,9 +99,11 @@ function handleNextTiles(x1, y1, x2, y2)
 
     if TileMap[y1][x1] == TILE_FOOD then
         growP1 = true
+        ScorePlayer1 = ScorePlayer1 + SCORE_FOOD
     end
     if TileMap[y2][x2] == TILE_FOOD then
         growP2 = true
+        ScorePlayer2 = ScorePlayer2 + SCORE_FOOD
     end
 
     return growP1, growP2
@@ -120,11 +124,13 @@ function updateState(dt)
     -- TODO: Handle game over state
     if LossPlayer1 or LossPlayer2 then
         love.event.quit()
+        ScorePlayer1 = ScorePlayer1 + SCORE_WIN
+        ScorePlayer2 = ScorePlayer2 + SCORE_WIN
         return
     end
 
     moveSnake(Snake1, x1, y1, TILE_PLAYER_1, grow1)
-    -- moveSnake(Snake2, x2, y2, TILE_PLAYER_2, grow2)
+    moveSnake(Snake2, x2, y2, TILE_PLAYER_2, grow2)
 
     if grow1 or grow2 then generateFood() end
 end

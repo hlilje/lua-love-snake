@@ -1,4 +1,5 @@
 require "game"
+require "interface"
 require "map"
 require "players"
 
@@ -8,6 +9,8 @@ function love.load()
     createState()
     createMap(love.graphics.getDimensions())
     createPlayers()
+    createInterface()
+
     generateFood()
 end
 
@@ -19,4 +22,5 @@ end
 -- Draw the game.
 function love.draw()
     drawMap()
+    drawScore()
 end
