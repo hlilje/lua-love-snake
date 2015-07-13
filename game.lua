@@ -162,26 +162,30 @@ end
 
 -- Update the game state.
 function updateState(dt)
-    TimeToMove = TimeToMove + dt
-    if TimeToMove < SPEED_GAME then return end
-    TimeToMove = 0
+    if GameState ~= STATE_PLAYING then
+        handleIntents()
+    elseif GameState == STATE_PLAYING then
+        TimeToMove = TimeToMove + dt
+        if TimeToMove < SPEED_GAME then return end
+        TimeToMove = 0
 
-    handleIntents()
+        handleIntents()
 
-    local x1, y1, x2, y2 = getNextPositions()
+        local x1, y1, x2, y2 = getNextPositions()
 
-    local grow1, grow2 = handleNextTiles(x1, y1, x2, y2)
+        local grow1, grow2 = handleNextTiles(x1, y1, x2, y2)
 
-    -- TODO: Handle game over state
-    if LossPlayer1 or LossPlayer2 then
-        love.event.quit()
-        ScorePlayer1 = ScorePlayer1 + SCORE_WIN
-        ScorePlayer2 = ScorePlayer2 + SCORE_WIN
-        return
+        -- TODO: Handle game over state
+        if LossPlayer1 or LossPlayer2 then
+            love.event.quit()
+            ScorePlayer1 = ScorePlayer1 + SCORE_WIN
+            ScorePlayer2 = ScorePlayer2 + SCORE_WIN
+            return
+        end
+
+        moveSnake(Snake1, x1, y1, TILE_PLAYER_1, grow1)
+        moveSnake(Snake2, x2, y2, TILE_PLAYER_2, grow2)
+
+        if grow1 or grow2 then generateFood() end
     end
-
-    moveSnake(Snake1, x1, y1, TILE_PLAYER_1, grow1)
-    moveSnake(Snake2, x2, y2, TILE_PLAYER_2, grow2)
-
-    if grow1 or grow2 then generateFood() end
 end

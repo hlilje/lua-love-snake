@@ -1,5 +1,9 @@
 SPEED_GAME = 0.15 -- Delay until game state advancement
-SIZE_TILE  = 16   -- Tile size in pixels
+
+-- Game element sizes.
+SIZE_TILE          = 16  -- Tile size in pixels
+MENU_BUTTON_WIDTH  = 200 -- Size of menu buttons in pixels-
+MENU_BUTTON_HEIGHT = 40  -- Size of menu buttons in pixels
 
 -- Game state enums
 STATE_MENU      = 0

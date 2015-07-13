@@ -23,6 +23,10 @@ end
 
 -- Draw the game.
 function love.draw()
-    drawMap()
-    drawScore()
+    if GameState == STATE_MENU then
+        drawMenu()
+    else
+        drawMap()
+        drawScore()
+    end
 end
