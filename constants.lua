@@ -1,6 +1,12 @@
 SPEED_GAME = 0.15 -- Delay until game state advancement
 SIZE_TILE  = 16   -- Tile size in pixels
 
+-- Game state enums
+STATE_MENU      = 0
+STATE_PLAYING   = 1
+STATE_PAUSED    = 2
+STATE_GAME_OVER = 3
+
 -- Tile enums
 TILE_FREE     = 0
 TILE_BLOCKED  = 1

@@ -29,12 +29,13 @@ end
 
 -- Initialise the game state.
 function createState()
-    TimeToMove   = 0     -- Keep track of when to advance state
-    Intents      = {}    -- Player intent queue
-    LossPlayer1  = false -- If player one loses from the move
-    LossPlayer2  = false -- If player two loses from the move
-    ScorePlayer1 = 0     -- Score of player 1
-    ScorePlayer2 = 0     -- Score of player 2
+    GameState    = STATE_MENU -- Current game state
+    TimeToMove   = 0          -- Keep track of when to advance state
+    Intents      = {}         -- Player intent queue
+    LossPlayer1  = false      -- If player one loses from the move
+    LossPlayer2  = false      -- If player two loses from the move
+    ScorePlayer1 = 0          -- Score of player 1
+    ScorePlayer2 = 0          -- Score of player 2
 end
 
 -- Add the given intent to the end of the intent queue.
@@ -45,23 +46,49 @@ end
 -- Keypress callback.
 function love.keypressed(key)
     if key == "escape" then
-        love.event.quit()
+        if GameState == STATE_MENU then
+            love.event.quit()
+        elseif GameState == STATE_PLAYING then
+            GameState = STATE_PAUSED
+        elseif GameState == STATE_PAUSED then
+            GameState = STATE_MENU
+        elseif GameState == STATE_GAME_OVER then
+            GameState = STATE_MENU
+        end
     elseif key == "w" then
-        addIntent(INTENT_PLAYER_1_UP)
+        if GameState == STATE_PLAYING then
+            addIntent(INTENT_PLAYER_1_UP)
+        end
     elseif key == "a" then
-        addIntent(INTENT_PLAYER_1_LEFT)
+        if GameState == STATE_PLAYING then
+            addIntent(INTENT_PLAYER_1_LEFT)
+        end
     elseif key == "s" then
-        addIntent(INTENT_PLAYER_1_DOWN)
+        if GameState == STATE_PLAYING then
+            addIntent(INTENT_PLAYER_1_DOWN)
+        elseif GameState == STATE_MENU then
+            GameState = STATE_PLAYING
+        end
     elseif key == "d" then
-        addIntent(INTENT_PLAYER_1_RIGHT)
+        if GameState == STATE_PLAYING then
+            addIntent(INTENT_PLAYER_1_RIGHT)
+        end
     elseif key == "up" then
-        addIntent(INTENT_PLAYER_2_UP)
+        if GameState == STATE_PLAYING then
+            addIntent(INTENT_PLAYER_2_UP)
+        end
     elseif key == "left" then
-        addIntent(INTENT_PLAYER_2_LEFT)
+        if GameState == STATE_PLAYING then
+            addIntent(INTENT_PLAYER_2_LEFT)
+        end
     elseif key == "down" then
-        addIntent(INTENT_PLAYER_2_DOWN)
+        if GameState == STATE_PLAYING then
+            addIntent(INTENT_PLAYER_2_DOWN)
+        end
     elseif key == "right" then
-        addIntent(INTENT_PLAYER_2_RIGHT)
+        if GameState == STATE_PLAYING then
+            addIntent(INTENT_PLAYER_2_RIGHT)
+        end
     end
 end
 
