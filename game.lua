@@ -98,7 +98,7 @@ end
 function handleIntents()
     while #Intents > 0 do
         handleIntent(Intents[1])
-        table.remove(Intents)
+        table.remove(Intents, 1)
     end
 end
 
