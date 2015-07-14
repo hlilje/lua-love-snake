@@ -1,5 +1,6 @@
 require "conf"
 require "constants"
+require "globals"
 require "interface"
 require "map"
 require "players"

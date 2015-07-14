@@ -1,4 +1,5 @@
 require "constants"
+require "globals"
 require "map"
 
 
@@ -29,13 +30,13 @@ function createPlayers()
 
     -- Randomise starting positions for players until they are unblocked
     repeat
-        xPosP1 = love.math.random(1, MAP_WIDTH)
-        yPosP1 = love.math.random(1, MAP_HEIGHT)
+        xPosP1 = love.math.random(1, MapWidth)
+        yPosP1 = love.math.random(1, MapHeight)
     until not isBlocked(xPosP1, yPosP1)
 
     repeat
-        xPosP2 = love.math.random(1, MAP_WIDTH)
-        yPosP2 = love.math.random(1, MAP_HEIGHT)
+        xPosP2 = love.math.random(1, MapWidth)
+        yPosP2 = love.math.random(1, MapHeight)
     until not isBlocked(xPosP2, yPosP2)
 
     addSnakePos(Snake1, xPosP1, yPosP1, TILE_PLAYER_1)

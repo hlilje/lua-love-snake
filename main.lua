@@ -9,7 +9,7 @@ function love.load()
     assertConfig()
 
     createState()
-    createMap(love.graphics.getDimensions())
+    createMap()
     createPlayers()
     createInterface()
 

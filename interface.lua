@@ -1,5 +1,5 @@
 require "constants"
-require "game"
+require "globals"
 
 
 -- Initialise the menu buttons.
