@@ -5,6 +5,7 @@ require "game"
 -- Initialise the menu buttons.
 function createMenuButtons()
     MenuButtons      = {}
+
     local numButtons = 3
     local offset     = MENU_BUTTON_HEIGHT + 40
     local w, h       = love.graphics.getWidth(), love.graphics.getHeight()
@@ -47,4 +48,17 @@ function drawScore()
     love.graphics.setColor(0, 0, 0)
     love.graphics.print("Score P1: " .. ScorePlayer1, x, y)
     love.graphics.print("Score P2: " .. ScorePlayer2, x, y + 20)
+end
+
+-- Return true if the given button has mouseover.
+function hasMouseover(button)
+    local x, y = love.mouse.getPosition()
+
+    if x >= button.x and x <= (button.x + button.w) then
+        if y >= button.y and y <= (button.y + button.h) then
+            return true
+        end
+    end
+
+    return false
 end

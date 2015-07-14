@@ -1,5 +1,6 @@
 require "conf"
 require "constants"
+require "interface"
 require "map"
 require "players"
 
@@ -38,60 +39,6 @@ function createState()
     ScorePlayer2 = 0          -- Score of player 2
 end
 
--- Add the given intent to the end of the intent queue.
-function addIntent(intent)
-    table.insert(Intents, intent)
-end
-
--- Keypress callback.
-function love.keypressed(key)
-    if key == "escape" then
-        if GameState == STATE_MENU then
-            love.event.quit()
-        elseif GameState == STATE_PLAYING then
-            GameState = STATE_PAUSED
-        elseif GameState == STATE_PAUSED then
-            GameState = STATE_MENU
-        elseif GameState == STATE_GAME_OVER then
-            GameState = STATE_MENU
-        end
-    elseif key == "w" then
-        if GameState == STATE_PLAYING then
-            addIntent(INTENT_PLAYER_1_UP)
-        end
-    elseif key == "a" then
-        if GameState == STATE_PLAYING then
-            addIntent(INTENT_PLAYER_1_LEFT)
-        end
-    elseif key == "s" then
-        if GameState == STATE_PLAYING then
-            addIntent(INTENT_PLAYER_1_DOWN)
-        elseif GameState == STATE_MENU then
-            GameState = STATE_PLAYING
-        end
-    elseif key == "d" then
-        if GameState == STATE_PLAYING then
-            addIntent(INTENT_PLAYER_1_RIGHT)
-        end
-    elseif key == "up" then
-        if GameState == STATE_PLAYING then
-            addIntent(INTENT_PLAYER_2_UP)
-        end
-    elseif key == "left" then
-        if GameState == STATE_PLAYING then
-            addIntent(INTENT_PLAYER_2_LEFT)
-        end
-    elseif key == "down" then
-        if GameState == STATE_PLAYING then
-            addIntent(INTENT_PLAYER_2_DOWN)
-        end
-    elseif key == "right" then
-        if GameState == STATE_PLAYING then
-            addIntent(INTENT_PLAYER_2_RIGHT)
-        end
-    end
-end
-
 -- Handle the given player intent.
 function handleIntent(intent)
     if intent == INTENT_PLAYER_1_UP then
@@ -118,6 +65,20 @@ function handleIntent(intent)
     elseif intent == INTENT_PLAYER_2_RIGHT then
         if Snake2.dir == MOVING_LEFT then reverseSnake(Snake2) end
         Snake2.dir = MOVING_RIGHT
+    elseif intent == INTENT_START_GAME then
+        GameState = STATE_PLAYING
+        -- TODO: Handle intent
+    elseif intent == INTENT_PAUSE_GAME then
+        GameState = STATE_PAUSED
+        -- TODO: Handle intent
+    elseif intent == INTENT_EXIT_GAME then
+        love.event.quit()
+    elseif intent == INTENT_OPEN_MENU then
+        GameState = STATE_MENU
+        -- TODO: Handle intent
+    elseif intent == INTENT_VIEW_HIGHSCORE then
+        GameState = STATE_HIGHSCORE
+        -- TODO: Handle intent
     end
 end
 
@@ -127,6 +88,11 @@ function handleIntents()
         handleIntent(Intents[1])
         table.remove(Intents, 1)
     end
+end
+
+-- Add the given intent to the end of the intent queue.
+function addIntent(intent)
+    table.insert(Intents, intent)
 end
 
 -- Handle which tiles the players are about to move to, return whether
@@ -187,5 +153,73 @@ function updateState(dt)
         moveSnake(Snake2, x2, y2, TILE_PLAYER_2, grow2)
 
         if grow1 or grow2 then generateFood() end
+    end
+end
+
+-- Keypress callback.
+function love.keypressed(key)
+    if key == "escape" then
+        if GameState == STATE_MENU then
+            addIntent(INTENT_EXIT_GAME)
+        elseif GameState == STATE_PLAYING then
+            addIntent(INTENT_PAUSE_GAME)
+        elseif GameState == STATE_PAUSED then
+            addIntent(INTENT_OPEN_MENU)
+        elseif GameState == STATE_GAME_OVER then
+            addIntent(INTENT_OPEN_MENU)
+        end
+    elseif key == "w" then
+        if GameState == STATE_PLAYING then
+            addIntent(INTENT_PLAYER_1_UP)
+        end
+    elseif key == "a" then
+        if GameState == STATE_PLAYING then
+            addIntent(INTENT_PLAYER_1_LEFT)
+        end
+    elseif key == "s" then
+        if GameState == STATE_PLAYING then
+            addIntent(INTENT_PLAYER_1_DOWN)
+        elseif GameState == STATE_MENU then
+            GameState = STATE_PLAYING
+        end
+    elseif key == "d" then
+        if GameState == STATE_PLAYING then
+            addIntent(INTENT_PLAYER_1_RIGHT)
+        end
+    elseif key == "up" then
+        if GameState == STATE_PLAYING then
+            addIntent(INTENT_PLAYER_2_UP)
+        end
+    elseif key == "left" then
+        if GameState == STATE_PLAYING then
+            addIntent(INTENT_PLAYER_2_LEFT)
+        end
+    elseif key == "down" then
+        if GameState == STATE_PLAYING then
+            addIntent(INTENT_PLAYER_2_DOWN)
+        end
+    elseif key == "right" then
+        if GameState == STATE_PLAYING then
+            addIntent(INTENT_PLAYER_2_RIGHT)
+        end
+    end
+end
+
+-- Mouse click callback.
+function love.mousepressed(x, y, button)
+    -- TODO: Implement
+    if GameState == STATE_MENU then
+        if hasMouseover(MenuButtons[1]) then
+            print("CLICK 1")
+            addIntent(INTENT_START_GAME)
+        end
+        if hasMouseover(MenuButtons[2]) then
+            print("CLICK 2")
+            addIntent(INTENT_VIEW_HIGHSCORE)
+        end
+        if hasMouseover(MenuButtons[3]) then
+            print("CLICK 3")
+            addIntent(INTENT_EXIT_GAME)
+        end
     end
 end
