@@ -162,6 +162,8 @@ function love.keypressed(key)
     if key == "escape" then
         if GameState == STATE_MENU then
             addIntent(INTENT_EXIT_GAME)
+        elseif GameState == STATE_HIGHSCORE then
+            addIntent(INTENT_OPEN_MENU)
         elseif GameState == STATE_PLAYING then
             addIntent(INTENT_PAUSE_GAME)
         elseif GameState == STATE_PAUSED then
@@ -203,6 +205,10 @@ function love.keypressed(key)
         if GameState == STATE_PLAYING then
             addIntent(INTENT_PLAYER_2_RIGHT)
         end
+    elseif key == "h" then
+        if GameState == STATE_MENU then
+            addIntent(INTENT_VIEW_HIGHSCORE)
+        end
     end
 end
 
@@ -211,15 +217,12 @@ function love.mousepressed(x, y, button)
     -- TODO: Implement
     if GameState == STATE_MENU then
         if hasMouseover(MenuButtons[1]) then
-            print("CLICK 1")
             addIntent(INTENT_START_GAME)
         end
         if hasMouseover(MenuButtons[2]) then
-            print("CLICK 2")
             addIntent(INTENT_VIEW_HIGHSCORE)
         end
         if hasMouseover(MenuButtons[3]) then
-            print("CLICK 3")
             addIntent(INTENT_EXIT_GAME)
         end
     end

@@ -1,5 +1,7 @@
--- Global menu variables
+-- Global interface variables
 MenuButtons = nil
+FontGeneral = nil
+FontButton  = nil
 
 -- Global map variables
 TileMap    = nil
