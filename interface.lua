@@ -40,9 +40,9 @@ function drawMenu()
 
     for i = 1, #MenuButtons do
         local btn = MenuButtons[i]
-        love.graphics.setColor(btn.colour);
-        love.graphics.rectangle("fill", btn.x, btn.y, btn.w, btn.h);
-        love.graphics.setColor(0, 0, 0);
+        love.graphics.setColor(btn.colour)
+        love.graphics.rectangle("fill", btn.x, btn.y, btn.w, btn.h)
+        love.graphics.setColor(0, 0, 0)
         love.graphics.print(btn.text, btn.x + (btn.w / 2) - 50, btn.y + 10)
     end
 end
