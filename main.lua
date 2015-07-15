@@ -25,8 +25,12 @@ end
 function love.draw()
     if GameState == STATE_MENU then
         drawMenu()
-    else
+    elseif GameState == STATE_PLAYING or GameState == STATE_PAUSED then
         drawMap()
         drawScore()
+    elseif GameState == STATE_GAME_OVER then
+        drawMap()
+        drawScore()
+        drawGameOverScreen()
     end
 end

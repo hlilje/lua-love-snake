@@ -71,8 +71,8 @@ function handleIntent(intent)
         -- TODO: Handle intent
     elseif intent == INTENT_PAUSE_GAME then
         GameState = STATE_PAUSED
-        -- TODO: Handle intent
     elseif intent == INTENT_EXIT_GAME then
+        -- TODO: Clean up to avoid exceptional termination
         love.event.quit()
     elseif intent == INTENT_OPEN_MENU then
         GameState = STATE_MENU
@@ -127,6 +127,18 @@ function handleNextTiles(x1, y1, x2, y2)
     return growP1, growP2
 end
 
+-- Handle possible game over state.
+function handleGameOver()
+    if LossPlayer1 or LossPlayer2 then
+        if LossPlayer1 and not LossPlayer2 then
+            ScorePlayer2 = ScorePlayer2 + SCORE_WIN
+        elseif LossPlayer2 and not LossPlayer1 then
+            ScorePlayer1 = ScorePlayer1 + SCORE_WIN
+        end
+        GameState = STATE_GAME_OVER
+    end
+end
+
 -- Update the game state.
 function updateState(dt)
     if GameState ~= STATE_PLAYING then
@@ -142,13 +154,7 @@ function updateState(dt)
 
         local grow1, grow2 = handleNextTiles(x1, y1, x2, y2)
 
-        -- TODO: Handle game over state
-        if LossPlayer1 or LossPlayer2 then
-            love.event.quit()
-            ScorePlayer1 = ScorePlayer1 + SCORE_WIN
-            ScorePlayer2 = ScorePlayer2 + SCORE_WIN
-            return
-        end
+        handleGameOver()
 
         moveSnake(Snake1, x1, y1, TILE_PLAYER_1, grow1)
         moveSnake(Snake2, x2, y2, TILE_PLAYER_2, grow2)
@@ -214,7 +220,6 @@ end
 
 -- Mouse click callback.
 function love.mousepressed(x, y, button)
-    -- TODO: Implement
     if GameState == STATE_MENU then
         if hasMouseover(MenuButtons[1]) then
             addIntent(INTENT_START_GAME)
