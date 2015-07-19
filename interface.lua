@@ -1,12 +1,13 @@
 require "constants"
 require "globals"
+require "localisation"
 
 
 -- Initialise the menu buttons.
 function createMenuButtons()
     MenuButtons      = {}
 
-    local numButtons = #MENU_BUTTON_LABELS
+    local numButtons = #STRINGS[LANG].MENU_BUTTON_LABELS
     local offset     = MENU_BUTTON_HEIGHT + 40
     local w, h       = love.graphics.getDimensions()
     local x          = (w / 2) - (MENU_BUTTON_WIDTH / 2)
@@ -18,7 +19,7 @@ function createMenuButtons()
                           w      = MENU_BUTTON_WIDTH,
                           h      = MENU_BUTTON_HEIGHT,
                           colour = COLOUR_BUTTON,
-                          text   = MENU_BUTTON_LABELS[i]}
+                          text   = STRINGS[LANG].MENU_BUTTON_LABELS[i]}
     end
 end
 
@@ -75,8 +76,10 @@ function drawScore()
 
     love.graphics.setFont(FontGeneral)
     love.graphics.setColor(COLOUR_FONT_GENERAL)
-    love.graphics.print("Score P1: " .. ScorePlayer1, x, y)
-    love.graphics.print("Score P2: " .. ScorePlayer2, x, y + 20)
+    love.graphics.print(STRINGS[LANG].SCORE_P1 .. ": " .. ScorePlayer1,
+            x, y)
+    love.graphics.print(STRINGS[LANG].SCORE_P2 .. ": " .. ScorePlayer2,
+            x, y + 20)
 end
 
 -- Draw the game over screen (overlay).
@@ -87,20 +90,22 @@ function drawGameOverScreen()
     local gameOverText = ""
 
     if LossPlayer1 and LossPlayer2 then
-        gameOverText = "DRAW"
+        gameOverText = STRINGS[LANG].DRAW
     elseif LossPlayer1 and not LossPlayer2 then
-        gameOverText = "PLAYER 2 WINS"
+        gameOverText = STRINGS[LANG].P2_WIN
     elseif LossPlayer2 and not LossPlayer1 then
-        gameOverText = "PLAYER 1 WINS"
+        gameOverText = STRINGS[LANG].P1_WIN
     end
 
     love.graphics.setFont(FontAlert)
     love.graphics.setColor(COLOUR_FONT_ALERT)
 
-    love.graphics.print("GAME OVER", x, y)
+    love.graphics.print(STRINGS[LANG].GAME_OVER, x, y)
     love.graphics.print(gameOverText, x, y + offset)
-    love.graphics.print("Score P1: " .. ScorePlayer1, x, y + (offset * 2))
-    love.graphics.print("Score P2: " .. ScorePlayer2, x, y + (offset * 3))
+    love.graphics.print(STRINGS[LANG].SCORE_P1 .. ": " ..  ScorePlayer1,
+            x, y + (offset * 2))
+    love.graphics.print(STRINGS[LANG].SCORE_P2 .. ": " .. ScorePlayer2,
+            x, y + (offset * 3))
 end
 
 -- Draw the pause screen.
@@ -110,7 +115,7 @@ function drawPauseScreen()
 
     love.graphics.setFont(FontAlert)
     love.graphics.setColor(COLOUR_FONT_ALERT)
-    love.graphics.print("GAME PAUSED", x, y)
+    love.graphics.print(STRINGS[LANG].GAME_PAUSED, x, y)
 end
 
 -- Return true if the given button has mouseover.

@@ -28,9 +28,6 @@ COLOUR_FONT_GENERAL     = {0, 0, 0}
 COLOUR_FONT_GENERAL_INV = {255, 255, 255}
 COLOUR_FONT_ALERT       = {100, 50, 50}
 
--- Texts on menu buttons
-MENU_BUTTON_LABELS = {"Start Game", "High Score", "Exit Game", "Back"}
-
 -- File names
 FILE_HIGHSCORES = "highscores.txt"
 

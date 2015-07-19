@@ -3,31 +3,34 @@ require "constants"
 require "filesystem"
 require "globals"
 require "interface"
+require "localisation"
 require "map"
 require "players"
 
 
 -- Check that the game config has the required values.
 function assertConfig()
-    assert(Config.window.width >= 128 and Config.window.width <= 1920, "Invalid screen width")
-    assert(Config.window.height >= 128 and Config.window.height <= 1080, "Invalid screen height")
-    assert(not Config.window.resizable, "Window resizing not allowed")
-    assert(not Config.console, "Console not allowed")
+    assert(Config.window.width >= 128 and Config.window.width <= 1920,
+            STRINGS[LANG].INVALID_SCREEN_WIDTH)
+    assert(Config.window.height >= 128 and Config.window.height <= 1080,
+            STRINGS[LANG].INVALID_SCREEN_HEIGHT)
+    assert(not Config.window.resizable, STRINGS[LANG].WARNING_WINDOW_RESIZING)
+    assert(not Config.console, STRINGS[LANG].WARNING_CONSOLE)
 
-    assert(Config.modules.audio   , "Missing LÖVE module")
-    assert(Config.modules.event   , "Missing LÖVE module")
-    assert(Config.modules.graphics, "Missing LÖVE module")
-    assert(Config.modules.image   , "Missing LÖVE module")
-    assert(Config.modules.joystick, "Missing LÖVE module")
-    assert(Config.modules.keyboard, "Missing LÖVE module")
-    assert(Config.modules.math    , "Missing LÖVE module")
-    assert(Config.modules.mouse   , "Missing LÖVE module")
-    assert(Config.modules.physics , "Missing LÖVE module")
-    assert(Config.modules.sound   , "Missing LÖVE module")
-    assert(Config.modules.system  , "Missing LÖVE module")
-    assert(Config.modules.timer   , "Missing LÖVE module")
-    assert(Config.modules.window  , "Missing LÖVE module")
-    assert(Config.modules.thread  , "Missing LÖVE module")
+    assert(Config.modules.audio   , STRINGS[LANG].MISSING_MODULE)
+    assert(Config.modules.event   , STRINGS[LANG].MISSING_MODULE)
+    assert(Config.modules.graphics, STRINGS[LANG].MISSING_MODULE)
+    assert(Config.modules.image   , STRINGS[LANG].MISSING_MODULE)
+    assert(Config.modules.joystick, STRINGS[LANG].MISSING_MODULE)
+    assert(Config.modules.keyboard, STRINGS[LANG].MISSING_MODULE)
+    assert(Config.modules.math    , STRINGS[LANG].MISSING_MODULE)
+    assert(Config.modules.mouse   , STRINGS[LANG].MISSING_MODULE)
+    assert(Config.modules.physics , STRINGS[LANG].MISSING_MODULE)
+    assert(Config.modules.sound   , STRINGS[LANG].MISSING_MODULE)
+    assert(Config.modules.system  , STRINGS[LANG].MISSING_MODULE)
+    assert(Config.modules.timer   , STRINGS[LANG].MISSING_MODULE)
+    assert(Config.modules.window  , STRINGS[LANG].MISSING_MODULE)
+    assert(Config.modules.thread  , STRINGS[LANG].MISSING_MODULE)
 end
 
 -- Initialise the game state.
