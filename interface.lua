@@ -6,8 +6,7 @@ require "globals"
 function createMenuButtons()
     MenuButtons      = {}
 
-    local texts      = {"Start Game", "High Score", "Exit Game", "Back"}
-    local numButtons = #texts
+    local numButtons = #MENU_BUTTON_LABELS
     local offset     = MENU_BUTTON_HEIGHT + 40
     local w, h       = love.graphics.getDimensions()
     local x          = (w / 2) - (MENU_BUTTON_WIDTH / 2)
@@ -19,15 +18,15 @@ function createMenuButtons()
                           w      = MENU_BUTTON_WIDTH,
                           h      = MENU_BUTTON_HEIGHT,
                           colour = COLOUR_BUTTON,
-                          text   = texts[i]}
+                          text   = MENU_BUTTON_LABELS[i]}
     end
 end
 
 -- Initialise the game interface.
 function createInterface()
-    FontGeneral = love.graphics.newFont(14)
-    FontButton  = love.graphics.newFont(18)
-    FontAlert   = love.graphics.newFont(24)
+    FontGeneral = love.graphics.newFont(SIZE_FONT_GENERAL)
+    FontButton  = love.graphics.newFont(SIZE_FONT_BUTTON)
+    FontAlert   = love.graphics.newFont(SIZE_FONT_ALERT)
     love.graphics.setFont(FontGeneral)
 
     createMenuButtons()

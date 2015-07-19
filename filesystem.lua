@@ -1,6 +1,6 @@
 -- Load the game high scores from file, creates the file if it
 -- doesn't exist.
--- Retun a table of the scores in descending order.
+-- Return a table of the scores in descending order.
 function loadHighScores()
     local file = nil
     local highScores = {}
