@@ -8,12 +8,7 @@ require "players"
 function love.load()
     assertConfig()
 
-    createState()
-    createMap()
-    createPlayers()
-    createInterface()
-
-    generateFood()
+    initState()
 end
 
 -- Update the game state.

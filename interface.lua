@@ -65,7 +65,7 @@ function drawGameOverScreen()
     local gameOverText = ""
 
     if LossPlayer1 and LossPlayer2 then
-        gameOverText = "TIED"
+        gameOverText = "DRAW"
     elseif LossPlayer1 and not LossPlayer2 then
         gameOverText = "PLAYER 2 WINS"
     elseif LossPlayer2 and not LossPlayer1 then

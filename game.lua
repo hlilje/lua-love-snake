@@ -40,6 +40,16 @@ function createState()
     ScorePlayer2 = 0          -- Score of player 2
 end
 
+-- Load the initial game state.
+function initState()
+    createState()
+    createMap()
+    createPlayers()
+    createInterface()
+
+    generateFood()
+end
+
 -- Handle the given player intent.
 function handleIntent(intent)
     if intent == INTENT_PLAYER_1_UP then
@@ -68,7 +78,6 @@ function handleIntent(intent)
         Snake2.dir = MOVING_RIGHT
     elseif intent == INTENT_START_GAME then
         GameState = STATE_PLAYING
-        -- TODO: Handle intent
     elseif intent == INTENT_PAUSE_GAME then
         GameState = STATE_PAUSED
     elseif intent == INTENT_EXIT_GAME then
@@ -76,10 +85,14 @@ function handleIntent(intent)
         love.event.quit()
     elseif intent == INTENT_OPEN_MENU then
         GameState = STATE_MENU
-        -- TODO: Handle intent
     elseif intent == INTENT_VIEW_HIGHSCORE then
         GameState = STATE_HIGHSCORE
         -- TODO: Handle intent
+    elseif intent == INTENT_RESTART_GAME then
+        if GameState == STATE_GAME_OVER then
+            initState()
+            GameState = STATE_MENU
+        end
     end
 end
 
@@ -175,7 +188,7 @@ function love.keypressed(key)
         elseif GameState == STATE_PAUSED then
             addIntent(INTENT_OPEN_MENU)
         elseif GameState == STATE_GAME_OVER then
-            addIntent(INTENT_OPEN_MENU)
+            addIntent(INTENT_RESTART_GAME)
         end
     elseif key == "w" then
         if GameState == STATE_PLAYING then
