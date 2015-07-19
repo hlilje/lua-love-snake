@@ -27,10 +27,10 @@ COLOUR_PLAYER_2 = {0, 0, 255}
 COLOUR_FOOD     = {0, 255, 0}
 
 -- Interface colours
-COLOUR_BACKGROUND     = {0, 0, 0}
-COLOUR_BUTTON         = {100, 100, 100}
-COLOUR_FONT_GENERAL   = {0, 0, 0}
-COLOUR_FONT_GAME_OVER = {333, 0, 0}
+COLOUR_BACKGROUND   = {0, 0, 0}
+COLOUR_BUTTON       = {100, 100, 100}
+COLOUR_FONT_GENERAL = {0, 0, 0}
+COLOUR_FONT_ALERT   = {333, 0, 0}
 
 -- Player movement direction enums
 MOVING_UP    = 0
@@ -57,3 +57,6 @@ INTENT_RESTART_GAME   = 13
 -- Score quanta
 SCORE_FOOD = 100
 SCORE_WIN  = 1000
+
+-- File names.
+FILE_HIGHSCORES = "highscores.txt"

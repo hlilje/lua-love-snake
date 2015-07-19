@@ -25,9 +25,9 @@ end
 
 -- Initialise the game interface.
 function createInterface()
-    FontGeneral  = love.graphics.newFont(14)
-    FontButton   = love.graphics.newFont(18)
-    FontGameOver = love.graphics.newFont(24)
+    FontGeneral = love.graphics.newFont(14)
+    FontButton  = love.graphics.newFont(18)
+    FontAlert   = love.graphics.newFont(24)
     love.graphics.setFont(FontGeneral)
 
     createMenuButtons()
@@ -72,13 +72,23 @@ function drawGameOverScreen()
         gameOverText = "PLAYER 1 WINS"
     end
 
-    love.graphics.setFont(FontGameOver)
-    love.graphics.setColor(COLOUR_FONT_GAME_OVER)
+    love.graphics.setFont(FontAlert)
+    love.graphics.setColor(COLOUR_FONT_ALERT)
 
     love.graphics.print("GAME OVER", x, y)
     love.graphics.print(gameOverText, x, y + offset)
     love.graphics.print("Score P1: " .. ScorePlayer1, x, y + (offset * 2))
     love.graphics.print("Score P2: " .. ScorePlayer2, x, y + (offset * 3))
+end
+
+-- Draw the pause screen.
+function drawPauseScreen()
+    local w, h = love.graphics.getDimensions()
+    local x, y = (w / 2) - 100, (h / 2) - 20
+
+    love.graphics.setFont(FontAlert)
+    love.graphics.setColor(COLOUR_FONT_ALERT)
+    love.graphics.print("GAME PAUSED", x, y)
 end
 
 -- Return true if the given button has mouseover.

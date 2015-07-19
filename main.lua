@@ -8,7 +8,7 @@ require "players"
 function love.load()
     assertConfig()
 
-    initState()
+    initGame()
 end
 
 -- Update the game state.
@@ -20,9 +20,13 @@ end
 function love.draw()
     if GameState == STATE_MENU then
         drawMenu()
-    elseif GameState == STATE_PLAYING or GameState == STATE_PAUSED then
+    elseif GameState == STATE_PLAYING then
         drawMap()
         drawScore()
+    elseif GameState == STATE_PAUSED then
+        drawMap()
+        drawScore()
+        drawPauseScreen()
     elseif GameState == STATE_GAME_OVER then
         drawMap()
         drawScore()

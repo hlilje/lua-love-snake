@@ -1,8 +1,8 @@
 -- Global interface variables
-MenuButtons  = nil
-FontGeneral  = nil
-FontButton   = nil
-FontGameOver = nil
+MenuButtons = nil
+FontGeneral = nil
+FontButton  = nil
+FontAlert   = nil
 
 -- Global map variables
 TileMap    = nil
@@ -17,6 +17,7 @@ LossPlayer1  = nil
 LossPlayer2  = nil
 ScorePlayer1 = nil
 ScorePlayer2 = nil
+HighScores   = nil
 
 -- Global player variables
 Snake1 = nil

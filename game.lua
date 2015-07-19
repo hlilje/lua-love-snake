@@ -1,5 +1,6 @@
 require "conf"
 require "constants"
+require "filesystem"
 require "globals"
 require "interface"
 require "map"
@@ -31,17 +32,18 @@ end
 
 -- Initialise the game state.
 function createState()
-    GameState    = STATE_MENU -- Current game state
-    TimeToMove   = 0          -- Keep track of when to advance state
-    Intents      = {}         -- Player intent queue
-    LossPlayer1  = false      -- If player one loses from the move
-    LossPlayer2  = false      -- If player two loses from the move
-    ScorePlayer1 = 0          -- Score of player 1
-    ScorePlayer2 = 0          -- Score of player 2
+    GameState    = STATE_MENU       -- Current game state
+    TimeToMove   = 0                -- Keep track of when to advance state
+    Intents      = {}               -- Player intent queue
+    LossPlayer1  = false            -- If player one loses from the move
+    LossPlayer2  = false            -- If player two loses from the move
+    ScorePlayer1 = 0                -- Score of player 1
+    ScorePlayer2 = 0                -- Score of player 2
+    HighScores   = loadHighScores() -- Load the high scores
 end
 
--- Load the initial game state.
-function initState()
+-- Initialise the game.
+function initGame()
     createState()
     createMap()
     createPlayers()
@@ -90,7 +92,7 @@ function handleIntent(intent)
         -- TODO: Handle intent
     elseif intent == INTENT_RESTART_GAME then
         if GameState == STATE_GAME_OVER then
-            initState()
+            initGame()
             GameState = STATE_MENU
         end
     end
