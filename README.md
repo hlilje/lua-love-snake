@@ -11,5 +11,5 @@ w, a, s, d                   // Player 1 movement keys
 up, left, down, right        // Player 2 movement keys
 escape                       // Pause, go to main menu, exit game
 s                            // Start game in main menu
-h                            // View high score in main menu
+h                            // View high scores in main menu
 ```

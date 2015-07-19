@@ -6,12 +6,12 @@ require "globals"
 function createMenuButtons()
     MenuButtons      = {}
 
-    local numButtons = 3
+    local texts      = {"Start Game", "High Score", "Exit Game", "Back"}
+    local numButtons = #texts
     local offset     = MENU_BUTTON_HEIGHT + 40
     local w, h       = love.graphics.getDimensions()
     local x          = (w / 2) - (MENU_BUTTON_WIDTH / 2)
     local y          = (h / 2) - (MENU_BUTTON_HEIGHT / 2) - (offset * (numButtons - 1) / 2)
-    local texts      = {"Start Game", "High Score", "Exit Game"}
 
     for i = 1, numButtons do
         MenuButtons[i] = {x      = x,
@@ -33,17 +33,40 @@ function createInterface()
     createMenuButtons()
 end
 
+-- Draw the given button to the screen.
+function drawButton(btn)
+    love.graphics.setFont(FontButton)
+
+    love.graphics.setColor(btn.colour)
+    love.graphics.rectangle("fill", btn.x, btn.y, btn.w, btn.h)
+    love.graphics.setColor(COLOUR_FONT_GENERAL)
+    love.graphics.print(btn.text, btn.x + (btn.w / 2) - 50, btn.y + 10)
+end
+
 -- Draw the game menu.
 function drawMenu()
     love.graphics.setBackgroundColor(COLOUR_BACKGROUND)
-    love.graphics.setFont(FontButton)
 
-    for i = 1, #MenuButtons do
-        local btn = MenuButtons[i]
-        love.graphics.setColor(btn.colour)
-        love.graphics.rectangle("fill", btn.x, btn.y, btn.w, btn.h)
-        love.graphics.setColor(COLOUR_FONT_GENERAL)
-        love.graphics.print(btn.text, btn.x + (btn.w / 2) - 50, btn.y + 10)
+    for i = 1, #MenuButtons - 1 do -- Skip back button
+        drawButton(MenuButtons[i])
+    end
+end
+
+-- Draw the high score screen.
+function drawHighScoreScreen()
+    local w, h   = love.graphics.getDimensions()
+    local offset = 25
+    local x, y   = (w / 2) - 100, (h / 2) - (#HighScores * offset)
+
+    -- Just draw back button
+    drawButton(MenuButtons[#MenuButtons])
+
+    love.graphics.setBackgroundColor(COLOUR_BACKGROUND)
+    love.graphics.setFont(FontGeneral)
+    love.graphics.setColor(COLOUR_FONT_GENERAL_INV)
+
+    for i = 1, #HighScores do
+        love.graphics.print(HighScores[i], x, y + (i - 1) * offset)
     end
 end
 

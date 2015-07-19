@@ -27,10 +27,11 @@ COLOUR_PLAYER_2 = {0, 0, 255}
 COLOUR_FOOD     = {0, 255, 0}
 
 -- Interface colours
-COLOUR_BACKGROUND   = {0, 0, 0}
-COLOUR_BUTTON       = {100, 100, 100}
-COLOUR_FONT_GENERAL = {0, 0, 0}
-COLOUR_FONT_ALERT   = {333, 0, 0}
+COLOUR_BACKGROUND       = {0, 0, 0}
+COLOUR_BUTTON           = {100, 100, 100}
+COLOUR_FONT_GENERAL     = {0, 0, 0}
+COLOUR_FONT_GENERAL_INV = {255, 255, 255}
+COLOUR_FONT_ALERT       = {100, 50, 50}
 
 -- Player movement direction enums
 MOVING_UP    = 0

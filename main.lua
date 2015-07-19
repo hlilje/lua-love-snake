@@ -20,6 +20,8 @@ end
 function love.draw()
     if GameState == STATE_MENU then
         drawMenu()
+    elseif GameState == STATE_HIGHSCORE then
+        drawHighScoreScreen()
     elseif GameState == STATE_PLAYING then
         drawMap()
         drawScore()

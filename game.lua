@@ -89,7 +89,6 @@ function handleIntent(intent)
         GameState = STATE_MENU
     elseif intent == INTENT_VIEW_HIGHSCORE then
         GameState = STATE_HIGHSCORE
-        -- TODO: Handle intent
     elseif intent == INTENT_RESTART_GAME then
         if GameState == STATE_GAME_OVER then
             initGame()
@@ -244,6 +243,10 @@ function love.mousepressed(x, y, button)
         end
         if hasMouseover(MenuButtons[3]) then
             addIntent(INTENT_EXIT_GAME)
+        end
+    elseif GameState == STATE_HIGHSCORE then
+        if hasMouseover(MenuButtons[4]) then
+            addIntent(INTENT_OPEN_MENU)
         end
     end
 end
