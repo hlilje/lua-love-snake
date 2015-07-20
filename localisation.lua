@@ -14,6 +14,6 @@ STRINGS = {
         WARNING_WINDOW_RESIZING = "Window resizing not allowed",
         WARNING_CONSOLE         = "Console not allowed",
         MISSING_MODULE          = "Missing LÖVE module",
-        MENU_BUTTON_LABELS      = {"Start Game", "High Score", "Exit Game", "Back"}
+        MENU_BUTTON_LABELS      = {"Start Game", "High Scores", "Exit Game", "Back"}
     }
 }

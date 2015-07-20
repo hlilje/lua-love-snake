@@ -1,4 +1,5 @@
-SPEED_GAME = 0.15 -- Delay until game state advancement in seconds
+SPEED_GAME     = 0.15 -- Delay until game state advancement in seconds
+SCORES_TO_SAVE = 10   -- Number of high scores to save
 
 -- Score quanta
 SCORE_FOOD = 100

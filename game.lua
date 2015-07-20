@@ -144,6 +144,28 @@ function handleNextTiles(x1, y1, x2, y2)
     return growP1, growP2
 end
 
+-- Check and save possible high score.
+-- Assume scores are sorted in descending order.
+function checkHighScore()
+    local highestScore = math.max(ScorePlayer1, ScorePlayer2)
+    local betterThan = (#HighScores == 0) and 1 or nil
+
+    for i = 1, #HighScores do
+        if highestScore >= HighScores[i] then
+            betterThan = i
+            break
+        end
+    end
+
+    if betterThan then
+        table.insert(HighScores, betterThan, highestScore)
+        if #HighScores > SCORES_TO_SAVE then
+            table.remove(HighScores) -- Remove lowest score
+        end
+        saveHighScores()
+    end
+end
+
 -- Handle possible game over state.
 function handleGameOver()
     if LossPlayer1 or LossPlayer2 then
@@ -153,6 +175,8 @@ function handleGameOver()
             ScorePlayer1 = ScorePlayer1 + SCORE_WIN
         end
         GameState = STATE_GAME_OVER
+
+        checkHighScore()
     end
 end
 
