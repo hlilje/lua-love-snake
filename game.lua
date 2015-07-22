@@ -122,12 +122,20 @@ function handleNextTiles(x1, y1, x2, y2)
     if x1 == x2 and y1 == y2 then
         LossPlayer1 = true
         LossPlayer1 = true
+        addCollisionTile(x1, y1)
         return false, false
     end
 
     -- Loss for player in question if the tile is currently blocked
-    LossPlayer1 = isBlocked(x1, y1)
-    LossPlayer2 = isBlocked(x2, y2)
+    if isBlocked(x1, y1) then
+        LossPlayer1 = true
+        addCollisionTile(x1, y1)
+    end
+    if isBlocked(x2, y2) then
+        LossPlayer2 = true
+        addCollisionTile(x2, y2)
+    end
+
     if LossPlayer1 or LossPlayer2 then
         return false, false
     end

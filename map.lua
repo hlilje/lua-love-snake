@@ -26,6 +26,23 @@ function createMap()
     for i = 1, MapHeight do TileMap[i][MapWidth]  = TILE_BLOCKED end
 end
 
+-- Randomly place one food on the map.
+function generateFood()
+    local x, y
+
+    repeat
+        x = love.math.random(1, MapWidth)
+        y = love.math.random(1, MapHeight)
+    until not isBlocked(x, y) and not isPlayer(x, y)
+
+    TileMap[y][x] = TILE_FOOD
+end
+
+-- Mark the given tile coordinates as a collision tile.
+function addCollisionTile(x, y)
+    TileMap[y][x] = TILE_COLLISION
+end
+
 -- Colour the tile at the given location.
 function colourTile(tile, x, y)
     local xPos = x * SIZE_TILE
@@ -41,8 +58,19 @@ function colourTile(tile, x, y)
         love.graphics.setColor(COLOUR_PLAYER_2)
     elseif tile == TILE_FOOD then
         love.graphics.setColor(COLOUR_FOOD)
+    elseif tile == TILE_COLLISION then
+        love.graphics.setColor(COLOUR_COLLISION)
     end
     love.graphics.rectangle("fill", xPos, yPos, SIZE_TILE, SIZE_TILE)
+end
+
+-- Draw the game map.
+function drawMap()
+    for i = 1, MapHeight do
+        for j = 1, MapWidth do
+            colourTile(TileMap[i][j], j - 1, i - 1)
+        end
+    end
 end
 
 -- Return true if the given position is blocked.
@@ -57,25 +85,4 @@ end
 -- Return true if the given position is a player tile.
 function isPlayer(x, y)
     return TileMap[y][x] == TILE_PLAYER_1 or TileMap[y][x] == TILE_PLAYER_2
-end
-
--- Draw the game map.
-function drawMap()
-    for i = 1, MapHeight do
-        for j = 1, MapWidth do
-            colourTile(TileMap[i][j], j - 1, i - 1)
-        end
-    end
-end
-
--- Randomly place one food on the map.
-function generateFood()
-    local x, y
-
-    repeat
-        x = love.math.random(1, MapWidth)
-        y = love.math.random(1, MapHeight)
-    until not isBlocked(x, y) and not isPlayer(x, y)
-
-    TileMap[y][x] = TILE_FOOD
 end
