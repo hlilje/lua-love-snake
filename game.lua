@@ -125,7 +125,7 @@ function handleNextTiles(x1, y1, x2, y2)
         return false, false
     end
 
-    -- Loss for given player if the tile is currently blocked
+    -- Loss for player in question if the tile is currently blocked
     LossPlayer1 = isBlocked(x1, y1)
     LossPlayer2 = isBlocked(x2, y2)
     if LossPlayer1 or LossPlayer2 then
@@ -192,15 +192,16 @@ function updateState(dt)
         handleIntents()
 
         local x1, y1, x2, y2 = getNextPositions()
-
         local grow1, grow2 = handleNextTiles(x1, y1, x2, y2)
 
         handleGameOver()
 
-        moveSnake(Snake1, x1, y1, TILE_PLAYER_1, grow1)
-        moveSnake(Snake2, x2, y2, TILE_PLAYER_2, grow2)
+        if GameState ~= STATE_GAME_OVER then
+            moveSnake(Snake1, x1, y1, TILE_PLAYER_1, grow1)
+            moveSnake(Snake2, x2, y2, TILE_PLAYER_2, grow2)
 
-        if grow1 or grow2 then generateFood() end
+            if grow1 or grow2 then generateFood() end
+        end
     end
 end
 

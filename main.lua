@@ -7,7 +7,6 @@ require "players"
 -- Load the game.
 function love.load()
     assertConfig()
-
     initGame()
 end
 

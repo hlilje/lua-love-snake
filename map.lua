@@ -20,9 +20,9 @@ function createMap()
     end
 
     -- Set all surrounding tiles as occupied
-    for i = 1, MapWidth  do TileMap[1][i]          = TILE_BLOCKED end
+    for i = 1, MapWidth  do TileMap[1][i]         = TILE_BLOCKED end
     for i = 1, MapWidth  do TileMap[MapHeight][i] = TILE_BLOCKED end
-    for i = 1, MapHeight do TileMap[i][1]          = TILE_BLOCKED end
+    for i = 1, MapHeight do TileMap[i][1]         = TILE_BLOCKED end
     for i = 1, MapHeight do TileMap[i][MapWidth]  = TILE_BLOCKED end
 end
 
