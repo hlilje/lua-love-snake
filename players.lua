@@ -5,7 +5,10 @@ require "map"
 
 -- Insert the given position to the front of the given snake.
 function addSnakePos(snake, x, y, playerTile)
-    TileMap[y][x] = playerTile
+    -- Don't overwrite the collision tile from game over
+    if TileMap[y][x] ~= TILE_COLLISION then
+        TileMap[y][x] = playerTile
+    end
     table.insert(snake.pos, 1, {x = x, y = y})
 end
 

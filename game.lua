@@ -204,12 +204,10 @@ function updateState(dt)
 
         handleGameOver()
 
-        if GameState ~= STATE_GAME_OVER then
-            moveSnake(Snake1, x1, y1, TILE_PLAYER_1, grow1)
-            moveSnake(Snake2, x2, y2, TILE_PLAYER_2, grow2)
+        moveSnake(Snake1, x1, y1, TILE_PLAYER_1, grow1)
+        moveSnake(Snake2, x2, y2, TILE_PLAYER_2, grow2)
 
-            if grow1 or grow2 then generateFood() end
-        end
+        if grow1 or grow2 then generateFood() end
     end
 end
 
