@@ -9,7 +9,7 @@ Twist: It is possbile to reverse the snake direction.
 ```
 w, a, s, d                   // Player 1 movement keys
 up, left, down, right        // Player 2 movement keys
-escape                       // Pause, go to main menu, exit game
+escape                       // Pause, unpause, go to main menu, exit game
 s                            // Start game in main menu
 h                            // View high scores in main menu
 ```

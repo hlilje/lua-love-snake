@@ -223,7 +223,7 @@ function love.keypressed(key)
         elseif GameState == STATE_PLAYING then
             addIntent(INTENT_PAUSE_GAME)
         elseif GameState == STATE_PAUSED then
-            addIntent(INTENT_OPEN_MENU)
+            addIntent(INTENT_START_GAME)
         elseif GameState == STATE_GAME_OVER then
             addIntent(INTENT_RESTART_GAME)
         end
