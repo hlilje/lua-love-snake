@@ -121,7 +121,7 @@ function handleNextTiles(x1, y1, x2, y2)
     -- Tie if they both move to the same tile simultaneously
     if x1 == x2 and y1 == y2 then
         LossPlayer1 = true
-        LossPlayer1 = true
+        LossPlayer2 = true
         addCollisionTile(x1, y1)
         return false, false
     end
