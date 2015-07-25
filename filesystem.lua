@@ -1,9 +1,9 @@
 -- Load the game high scores from file, create the file if it doesn't exist.
 -- Return a table of the scores in descending order.
 function loadHighScores()
-    local file = nil
+    local file
+    local ok, err
     local highScores = {}
-    local ok, err = nil, nil
 
     if love.filesystem.exists(FILE_HIGHSCORES) then
         file = love.filesystem.newFile(FILE_HIGHSCORES)
@@ -48,9 +48,9 @@ end
 
 -- Save the current high scores to file, create the file if it doesn't exist.
 function saveHighScores()
-    local file = nil
+    local file
+    local ok, err
     local highScores = {}
-    local ok, err = nil, nil
 
     -- Creates file if not present
     file = love.filesystem.newFile(FILE_HIGHSCORES)

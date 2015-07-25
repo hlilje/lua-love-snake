@@ -155,7 +155,7 @@ end
 -- Assume scores are sorted in descending order.
 function checkHighScore()
     local highestScore = math.max(ScorePlayer1, ScorePlayer2)
-    local betterThan = (#HighScores == 0) and 1 or nil
+    local betterThan   = (#HighScores == 0) and 1 or nil
 
     for i = 1, #HighScores do
         if highestScore >= HighScores[i] then
