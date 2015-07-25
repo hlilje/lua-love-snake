@@ -65,8 +65,7 @@ function saveHighScores()
         else
             -- Write high scores to file
             for i = 1, #HighScores do
-                ok, err = love.filesystem.append(FILE_HIGHSCORES, HighScores[i] .. '\n')
-                if not ok then
+                ok, err = love.filesystem.append(FILE_HIGHSCORES, HighScores[i] .. "\n") if not ok then
                     io.stderr:write(err)
                 end
             end
