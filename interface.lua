@@ -73,7 +73,7 @@ end
 
 -- Draw the player score.
 function drawScore()
-    local x, y = 20, 20
+    local x, y = SizeTileX + 5, SizeTileY + 5
 
     love.graphics.setFont(FontGeneral)
     love.graphics.setColor(COLOUR_FONT_GENERAL)

@@ -1,3 +1,5 @@
+NUM_TILES_X    = 64   -- Number of tiles in x direction
+NUM_TILES_Y    = 48   -- Number of tiles in y direction
 SPEED_GAME     = 0.15 -- Delay until game state advancement in seconds
 SCORES_TO_SAVE = 10   -- Number of high scores to save
 
@@ -6,7 +8,6 @@ SCORE_FOOD = 100
 SCORE_WIN  = 1000
 
 -- Game element sizes in pixels
-SIZE_TILE          = 16
 MENU_BUTTON_WIDTH  = 200
 MENU_BUTTON_HEIGHT = 40
 

@@ -5,9 +5,9 @@ FontButton  = nil
 FontAlert   = nil
 
 -- Global map variables
+SizeTileX  = nil
+SizeTileY  = nil
 TileMap    = nil
-MapWidth   = nil
-MapHeight  = nil
 
 -- Global game state variables
 GameState    = nil
