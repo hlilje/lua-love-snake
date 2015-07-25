@@ -56,7 +56,7 @@ end
 function drawHighScoreScreen()
     local w, h   = love.graphics.getDimensions()
     local offset = 25
-    local x, y   = (w / 2) - 100, (h / 2) - (#HighScores * offset)
+    local x, y   = (w / 2) - MENU_BUTTON_WIDTH - 35, (h / 2) - (#HighScores * offset)
 
     -- Just draw back button
     drawButton(MenuButtons[#MenuButtons])
@@ -66,7 +66,8 @@ function drawHighScoreScreen()
     love.graphics.setColor(COLOUR_FONT_GENERAL_INV)
 
     for i = 1, #HighScores do
-        love.graphics.print(HighScores[i], x, y + (i - 1) * offset)
+        love.graphics.printf(i .. ".\t" .. HighScores[i],
+                x, y + (i - 1) * offset, MENU_BUTTON_WIDTH, 'right')
     end
 end
 

@@ -86,7 +86,6 @@ function handleIntent(intent)
     elseif intent == INTENT_PAUSE_GAME then
         GameState = STATE_PAUSED
     elseif intent == INTENT_EXIT_GAME then
-        -- TODO: Clean up to avoid exceptional termination
         love.event.quit()
     elseif intent == INTENT_OPEN_MENU then
         GameState = STATE_MENU
