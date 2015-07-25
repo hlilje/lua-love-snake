@@ -15,7 +15,10 @@ end
 -- Remove the tail of the given snake.
 function delSnakePos(snake)
     local x, y = snake.pos[#snake.pos].x, snake.pos[#snake.pos].y
-    TileMap[y][x] = TILE_FREE
+    -- Don't overwrite the collision tile from game over
+    if TileMap[y][x] ~= TILE_COLLISION then
+        TileMap[y][x] = TILE_FREE
+    end
     table.remove(snake.pos)
 end
 
