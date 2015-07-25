@@ -40,7 +40,7 @@ function drawButton(btn)
     love.graphics.setColor(btn.colour)
     love.graphics.rectangle("fill", btn.x, btn.y, btn.w, btn.h)
     love.graphics.setColor(COLOUR_FONT_GENERAL)
-    love.graphics.print(btn.text, btn.x + (btn.w / 2) - 50, btn.y + 10)
+    love.graphics.printf(btn.text, 0, btn.y + 10, love.graphics.getWidth(), "center")
 end
 
 -- Draw the game menu.
@@ -67,7 +67,7 @@ function drawHighScoreScreen()
 
     for i = 1, #HighScores do
         love.graphics.printf(i .. ".\t" .. HighScores[i],
-                x, y + (i - 1) * offset, MENU_BUTTON_WIDTH, 'right')
+                x, y + (i - 1) * offset, MENU_BUTTON_WIDTH, "right")
     end
 end
 
