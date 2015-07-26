@@ -52,19 +52,23 @@ end
 -- Return the next position the given snake will move to.
 function getNextSnakePos(snake)
     local x, y
+    -- Continue from oppposite side if outside window
+    local function convertPos(pos, numTiles)
+        return ((pos - 1) % numTiles) + 1
+    end
 
     if snake.dir == MOVING_UP then
-        x = snake.pos[1].x
-        y = snake.pos[1].y - 1
+        x = convertPos(snake.pos[1].x, NUM_TILES_X)
+        y = convertPos(snake.pos[1].y - 1, NUM_TILES_Y)
     elseif snake.dir == MOVING_LEFT then
-        x = snake.pos[1].x - 1
-        y = snake.pos[1].y
+        x = convertPos(snake.pos[1].x - 1, NUM_TILES_X)
+        y = convertPos(snake.pos[1].y, NUM_TILES_Y)
     elseif snake.dir == MOVING_DOWN then
-        x = snake.pos[1].x
-        y = snake.pos[1].y + 1
+        x = convertPos(snake.pos[1].x, NUM_TILES_X)
+        y = convertPos(snake.pos[1].y + 1, NUM_TILES_Y)
     elseif snake.dir == MOVING_RIGHT then
-        x = snake.pos[1].x + 1
-        y = snake.pos[1].y
+        x = convertPos(snake.pos[1].x + 1, NUM_TILES_X)
+        y = convertPos(snake.pos[1].y, NUM_TILES_Y)
     end
 
     return x, y
