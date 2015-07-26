@@ -112,11 +112,11 @@ end
 -- Draw the pause screen.
 function drawPauseScreen()
     local w, h = love.graphics.getDimensions()
-    local x, y = (w / 2) - 100, (h / 2) - 20
+    local y = (h / 2) - 20
 
     love.graphics.setFont(FontAlert)
     love.graphics.setColor(COLOUR_FONT_ALERT)
-    love.graphics.print(STRINGS[LANG].GAME_PAUSED, x, y)
+    love.graphics.printf(STRINGS[LANG].GAME_PAUSED, 0, y, w, "center")
 end
 
 -- Return true if the given button has mouseover.
