@@ -3,6 +3,7 @@ MenuButtons = nil
 FontGeneral = nil
 FontButton  = nil
 FontAlert   = nil
+FontTitle   = nil
 
 -- Global map variables
 SizeTileX  = nil

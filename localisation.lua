@@ -2,6 +2,7 @@ LANG = "en" -- Game language to use
 
 STRINGS = {
     en = {
+        GAME_TITLE              = "Lua Love Snake",
         SCORE_P1                = "Score P1",
         SCORE_P2                = "Score P2",
         DRAW                    = "DRAW",

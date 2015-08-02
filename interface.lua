@@ -28,6 +28,7 @@ function createInterface()
     FontGeneral = love.graphics.newFont(SIZE_FONT_GENERAL)
     FontButton  = love.graphics.newFont(SIZE_FONT_BUTTON)
     FontAlert   = love.graphics.newFont(SIZE_FONT_ALERT)
+    FontTitle   = love.graphics.newFont(SIZE_FONT_TITLE)
     love.graphics.setFont(FontGeneral)
 
     createMenuButtons()
@@ -45,7 +46,14 @@ end
 
 -- Draw the game menu.
 function drawMenu()
+    local w, h = love.graphics.getDimensions()
+
     love.graphics.setBackgroundColor(COLOUR_BACKGROUND)
+
+    -- Draw menu title
+    love.graphics.setColor(COLOUR_FONT_TITLE)
+    love.graphics.setFont(FontTitle)
+    love.graphics.printf(STRINGS[LANG].GAME_TITLE, 0, (h / 8) - 10, w, "center")
 
     for i = 1, #MenuButtons - 1 do -- Skip back button
         drawButton(MenuButtons[i])
