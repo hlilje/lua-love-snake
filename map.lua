@@ -11,6 +11,28 @@ function createSolidMapBorder()
     for i = 1, NUM_TILES_Y do TileMap[i][NUM_TILES_X] = TILE_BLOCKED end
 end
 
+-- Do a random walk around a random point on the map to create an obstacle.
+function randomWalkObstacle()
+    -- Pick an initial position
+    local x     = love.math.random(1, NUM_TILES_X)
+    local y     = love.math.random(1, NUM_TILES_Y)
+    local xNew, yNew
+
+    -- Pick random walk length
+    walkLimit = love.math.random(1, LENGTH_RANDOM_WALK)
+
+    -- Do the walk
+    for i = 1, walkLimit do
+        xNew = x + love.math.random(-1, 1)
+        yNew = y + love.math.random(-1, 1)
+        if (xNew < 1 or xNew > NUM_TILES_X) or
+           (yNew < 1 or yNew > NUM_TILES_Y) then break end
+        x = xNew
+        y = yNew
+        TileMap[y][x] = TILE_BLOCKED
+    end
+end
+
 -- Generate one random map border.
 -- {x, y}Static ~= nil => use loop index. limit = iteration limit.
 function createRandomMapBorder(xStatic, yStatic, limit)
@@ -47,6 +69,15 @@ function createRandomMapBorders()
     createRandomMapBorder(NUM_TILES_X, nil, NUM_TILES_Y)
 end
 
+-- Generate a basic random map.
+function createRandomMap()
+    createRandomMapBorders()
+    local numObstacles = love.math.random(0, NUM_RANDOM_OBSTACLES)
+    for i = 1, numObstacles do
+        randomWalkObstacle()
+    end
+end
+
 -- Create the game map.
 function createMap()
     TileMap = {} -- [y][x]
@@ -71,8 +102,8 @@ function createMap()
         end
     end
 
-    -- Set all surrounding tiles as occupied
-    createRandomMapBorders()
+    -- Generate map obstacles
+    createRandomMap()
 end
 
 -- Randomly place one food on the map.
@@ -82,7 +113,7 @@ function generateFood()
     repeat
         x = love.math.random(1, NUM_TILES_X)
         y = love.math.random(1, NUM_TILES_Y)
-    until not isBlocked(x, y) and not isPlayer(x, y)
+    until not isBlocked(x, y)
 
     TileMap[y][x] = TILE_FOOD
 end
@@ -129,9 +160,4 @@ function isBlocked(x, y)
     else
         return TileMap[y][x] ~= TILE_FREE and TileMap[y][x] ~= TILE_FOOD
     end
-end
-
--- Return true if the given position is a player tile.
-function isPlayer(x, y)
-    return TileMap[y][x] == TILE_PLAYER_1 or TileMap[y][x] == TILE_PLAYER_2
 end

@@ -1,7 +1,12 @@
-NUM_TILES_X    = 64   -- Number of tiles in x direction
-NUM_TILES_Y    = 48   -- Number of tiles in y direction
+-- General game constants
 SPEED_GAME     = 0.15 -- Delay until game state advancement in seconds
 SCORES_TO_SAVE = 10   -- Number of high scores to save
+
+-- Map numbers
+NUM_TILES_X          = 64 -- Number of tiles in x direction
+NUM_TILES_Y          = 48 -- Number of tiles in y direction
+NUM_RANDOM_OBSTACLES = 20 -- Max number of random walk obstacles on the map
+LENGTH_RANDOM_WALK   = 50 -- Max length of random walks on the map
 
 -- Score quanta
 SCORE_FOOD = 100
