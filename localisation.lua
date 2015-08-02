@@ -15,6 +15,6 @@ STRINGS = {
         WARNING_CONSOLE         = "Console not allowed",
         MISSING_MODULE          = "Missing LÖVE module",
         TILE_SIZE_WARNING       = "Warning, the current window resolution will result in non-square tiles",
-        MENU_BUTTON_LABELS      = {"Start Game", "High Scores", "Exit Game", "Back"}
+        MENU_BUTTON_LABELS      = {"New Game", "High Scores", "Quit", "Back"}
     }
 }
